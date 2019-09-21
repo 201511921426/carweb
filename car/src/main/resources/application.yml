@@ -1,0 +1,29 @@
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      username: root
+      password: pan123456
+      url: jdbc:mysql://localhost:3306/project9.19?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+      initial-size: 5
+      max-active: 10
+      min-idle: 6
+      filter: stat,wall,slf4j
+      web-stat-filter:
+        enabled: true
+        log-slow-sql: true
+        url-pattern: /*
+        exclusions: "*.js,*.png,/druid/*"
+      stat-view-servlet:
+        enabled: true
+        reset-enable: ture
+        url-pattern: /druid/*
+        login-username: admin
+        login-password: admin
+        allow: 127.0.0.1
+        deny: ""
+
+mybatis:
+  type-aliases-package: com.vip.car.domain.entity
+  mapper-locations: classpath:mappers/**/*.xml

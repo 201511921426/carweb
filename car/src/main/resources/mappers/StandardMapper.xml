@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vip.car.mapper.StandardMapper">
+  <resultMap id="BaseResultMap" type="com.vip.car.domain.entity.Standard">
+    <id column="standard_id" jdbcType="INTEGER" property="standardId" />
+    <result column="types" jdbcType="VARCHAR" property="types" />
+  </resultMap>
+
+
+</mapper>
