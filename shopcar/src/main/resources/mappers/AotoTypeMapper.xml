@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vip.shopcar.mapper.AotoTypeMapper">
+  <resultMap id="AutoResultMap" type="com.vip.shopcar.domain.entity.AotoType">
+    <!--@mbg.generated-->
+    <id column="autotype_id" jdbcType="INTEGER" property="autotypeId" />
+    <result column="autotypes" jdbcType="VARCHAR" property="autotypes" />
+  </resultMap>
+
+</mapper>

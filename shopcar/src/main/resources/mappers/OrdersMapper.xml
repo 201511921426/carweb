@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vip.shopcar.mapper.OrdersMapper">
+  <resultMap id="OrdersResultMap" type="com.vip.shopcar.domain.vo.OrdersVo">
+    <!--@mbg.generated-->
+    <id column="carorder_id" jdbcType="INTEGER" property="carorderId" />
+    <result column="uid" jdbcType="INTEGER" property="uid" />
+    <result column="car_id" jdbcType="INTEGER" property="carId" />
+    <result column="total_price" jdbcType="DOUBLE" property="totalPrice" />
+    <result column="is_delete" jdbcType="TINYINT" property="isDelete" />
+    <result column="number" jdbcType="INTEGER" property="number" />
+    <result column="shopcar_id" jdbcType="INTEGER" property="shopcarId" />
+
+    <collection property="carList" resultMap="com.vip.shopcar.mapper.CarMapper.CarResultMap"/>
+    <collection property="userList" resultMap="com.vip.shopcar.mapper.UserMapper.UserResultMap"/>
+  </resultMap>
+  <insert id="save">
+    insert into
+    orders(uid,car_id,total_price,number,shopcar_id)
+    values (#{uid},#{carId},#{totalPrice},#{number},#{shopcarId})
+  </insert>
+  <update id="update">
+    update orders
+    set is_delete=1
+    where uid=#{uid}
+    and car_id=#{carId}
+    and shopcar_id=#{shopcarId}
+    and is_delete=0
+  </update>
+
+  <select id="findOrders" resultMap="OrdersResultMap">
+    select
+    o.number,o.total_price,
+    u.username,u.phone,u.address,
+    c.carname,c.prices,
+    a.autotypes,
+    b.brand_name,
+    c2.color,
+    s2.types
+    from orders o
+    left join user u on o.uid = u.uid
+    left join shopcar s9 on o.shopcar_id = s9.shopcar_id
+    left join car c on o.car_id = c.car_id
+    right join aoto_type a on c.autotype_id = a.autotype_id
+    right join brand b on c.brand_id = b.brand_id
+    right join color c2 on c.color_id = c2.color_id
+    right join standard s2 on c.standard_id = s2.standard_id
+    where o.uid = #{uid}
+    and o.car_id=#{carId}
+    and o.is_delete=0
+  </select>
+  <select id="findOrder" resultMap="OrdersResultMap">
+    select *
+    from orders
+    where uid=#{uid}
+    and car_id =#{carId}
+    and shopcar_id=#{shopcarId}
+  </select>
+  <update id="update1">
+    update orders
+    set number=#{number}
+    where uid=#{uid}
+    and car_id=#{carId}
+    and shopcar_id=#{shopcarId}
+  </update>
+
+</mapper>

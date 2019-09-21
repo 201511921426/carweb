@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vip.customize.mapper.CustomizeMapper">
+  <resultMap id="BaseResultMap" type="com.vip.customize.domain.entity.Customize">
+    <!--@mbg.generated-->
+    <id column="customize_id" jdbcType="INTEGER" property="customizeId" />
+    <result column="budget" jdbcType="DOUBLE" property="budget" />
+    <result column="auto_type" jdbcType="VARCHAR" property="autoType" />
+    <result column="standard" jdbcType="VARCHAR" property="standard" />
+    <result column="uid" jdbcType="INTEGER" property="uid" />
+    <result column="num" jdbcType="INTEGER" property="num" />
+    <result column="brand" jdbcType="INTEGER" property="brand" />
+
+  </resultMap>
+  <select id="findById" resultMap="BaseResultMap">
+    select *
+    from customize
+    where budget=#{budget}
+    and auto_type=#{autoType}
+    and standard=#{standard}
+    and uid=#{uid}
+    and brand=#{brand}
+  </select>
+
+  <insert id="save">
+    insert into
+    customize(budget, auto_type, standard, uid, num, brand)
+    value(#{budget},#{autoType},#{standard},#{uid},#{num},#{brand})
+  </insert>
+
+  <update id="update">
+ update customize
+    set num = #{num}
+    where customize_id=#{customizeId}
+  </update>
+
+</mapper>

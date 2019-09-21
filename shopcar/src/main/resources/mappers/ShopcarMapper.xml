@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vip.shopcar.mapper.ShopcarMapper">
+  <resultMap id="ShopcarResultMap" type="com.vip.shopcar.domain.vo.ShopcarVo">
+    <!--@mbg.generated-->
+    <id column="shopcar_id" jdbcType="INTEGER" property="shopcarId" />
+    <result column="car_id" jdbcType="INTEGER" property="carId" />
+    <result column="uid" jdbcType="INTEGER" property="uid" />
+    <result column="number" jdbcType="INTEGER" property="number" />
+    <result column="is_delete" jdbcType="TINYINT" property="isDelete" />
+    <collection property="userList" resultMap="com.vip.shopcar.mapper.UserMapper.UserResultMap"/>
+    <collection property="carList" resultMap="com.vip.shopcar.mapper.CarMapper.CarResultMap"/>
+
+  </resultMap>
+  <select id="findAll" resultMap="ShopcarResultMap">
+    select
+    s.shopcar_id,s.number,
+    u.username,u.phone,
+    c.carname,c.prices,
+    a.autotypes,
+    b.brand_name,
+    c2.color,
+    p.price,
+    s2.types
+    from shopcar s
+    left join user u on s.uid = u.uid
+    left join car c on s.car_id = c.car_id
+    right join aoto_type a on c.autotype_id = a.autotype_id
+    right join brand b on c.brand_id = b.brand_id
+    right join color c2 on c.color_id = c2.color_id
+    right join price p on c.price_id = p.price_id
+    right join standard s2 on c.standard_id = s2.standard_id
+    where s.uid=#{uid}
+    and s.is_delete=0
+  </select>
+  <update id="updateById">
+    update shopcar
+    set number = #{number}
+    where uid =#{uid}
+    and car_id=#{carId}
+  </update>
+  <select id="findCar" resultMap="ShopcarResultMap">
+    select * from shopcar
+  </select>
+  <update id="updateByIsDelete">
+    update shopcar
+    set is_delete=1
+    where uid =#{uid}
+    and car_id=#{carId}
+    and is_delete=0
+  </update>
+
+</mapper>
